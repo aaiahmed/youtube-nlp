@@ -1,0 +1,10 @@
+youtube:
+  api_service_name: "youtube"
+  api_version: "v3"
+  api_key: ""
+
+video:
+  max_results: 20      # 1 - 50
+  order: "relevance"   # "viewCount"/"date"/"rating"/"relevance" etc.
+  language: "en"
+  search_text: "cat"
