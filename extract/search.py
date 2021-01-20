@@ -3,7 +3,10 @@ Searches in youtube for given text.
 """
 
 from utils.config import get_config
-from extract.client import get_client
+from utils.client import get_client
+from utils.logger import get_logger
+
+logger = get_logger()
 
 
 def search_youtube(youtube, search_text, language, order, max_results):
@@ -13,9 +16,11 @@ def search_youtube(youtube, search_text, language, order, max_results):
     :param search_text: text to search in youtube.
     :param language: desired caption language.
     :param order: define search order.
+    :param max_results: limit of number of videos.
     :return: a list containing video ids.
     """
 
+    logger.info("Searing youtube for: {search_text}".format(search_text=search_text))
     request = youtube.search().list(
         q=search_text,
         order=order,

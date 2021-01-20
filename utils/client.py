@@ -22,7 +22,8 @@ def get_client():
     return googleapiclient.discovery.build(
         serviceName=api_service_name,
         version=api_version,
-        developerKey=api_key)
+        developerKey=api_key,
+        cache_discovery=False)
 
 
 def main():

@@ -1,15 +1,15 @@
 youtube:
   api_service_name: "youtube"
   api_version: "v3"
-  api_key: ""
+  api_key: ""          # reads from env GOOGLE_API_KEY
 
 video:
-  max_results: 20      # 1 - 50
-  order: "relevance"   # "viewCount"/"date"/"rating"/"relevance" etc.
+  max_results: 5       # max: 50
+  order: "relevance"   # options: "viewCount"/"date"/"rating"/"relevance"
   language: "en"
-  search_text: "cat"
+  search_text: "apple m1"
 
 app:
   search: True
   download: True
-  nlp: True
+  nlp: False
