@@ -6,7 +6,7 @@ from utils.config import get_config
 from extract.client import get_client
 
 
-def search_youtube(youtube, search_text, language, order):
+def search_youtube(youtube, search_text, language, order, max_results):
     """
     Searches desired text in youtube api and returns result.
     :param youtube: youtube client.
@@ -23,7 +23,7 @@ def search_youtube(youtube, search_text, language, order):
         type="video",
         relevanceLanguage=language,
         videoCaption="closedCaption",
-        maxResults=1
+        maxResults=max_results
     )
 
     response = request.execute()
@@ -33,10 +33,14 @@ def search_youtube(youtube, search_text, language, order):
 def main():
     conf = get_config()
     youtube = get_client()
+
     search_text = conf['video']['search_text']
     language = conf['video']['language']
     order = conf['video']['order']
-    print(search_youtube(youtube, search_text, language, order))
+    max_results = conf['video']['max_results']
+
+    if conf['app']['search']:
+        print(search_youtube(youtube, search_text, language, order, max_results))
 
 
 if __name__ == "__main__":

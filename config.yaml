@@ -8,3 +8,8 @@ video:
   order: "relevance"   # "viewCount"/"date"/"rating"/"relevance" etc.
   language: "en"
   search_text: "cat"
+
+app:
+  search: True
+  download: True
+  nlp: True

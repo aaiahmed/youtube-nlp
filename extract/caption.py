@@ -3,12 +3,13 @@ Finds captions for videos.
 """
 import youtube_dl
 from xml.etree import ElementTree
+from utils.config import get_config
 
 
 def get_captions_using_youtube_dl(video_ids, language):
     """
-    For a list of video ids, downloads subtitles using youtube-dl
-    extract raw text and writes to subtitles folder.
+    For a list of video ids, downloads subtitles using youtube-dl,
+    extracts raw text and writes to subtitles folder.
     :param video_ids: list of video ids.
     :param language: language
     :return:
@@ -44,7 +45,7 @@ def extract_text_from_ttml(video_id):
     """
 
     text = []
-    filename = 'subtitles/{video_id}.en.ttml'.format(video_id=video_id)  # 'subtitles/o_-HIxXRfOY.en.ttml'
+    filename = 'subtitles/{video_id}.en.ttml'.format(video_id=video_id)
     namespace = 'http://www.w3.org/ns/ttml'
     tree = ElementTree.parse(filename)
     root = tree.getroot()
@@ -118,9 +119,12 @@ def download_caption_using_youtube_api(youtube, caption_id):
 
 
 def main():
+    conf = get_config()
     sample_video_ids = ['o_-HIxXRfOY']
-    language = 'en'
-    get_captions_using_youtube_dl(sample_video_ids, language)
+    language = conf['video']['language']
+
+    if conf['app']['download']:
+        get_captions_using_youtube_dl(sample_video_ids, language)
 
 
 if __name__ == "__main__":
