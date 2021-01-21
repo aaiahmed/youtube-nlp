@@ -5,7 +5,8 @@ from utils.config import get_config
 from utils.client import get_client
 from extract.search import search_youtube
 from extract.caption import download_captions
-from nlp.create_corpus import get_clean_corpus
+from nlp.perform_nlp import perform_nlp
+from demo.create_wordcloud import show_word_cloud
 
 
 def read_config():
@@ -42,7 +43,8 @@ def main():
         download_captions(search_text, video_ids, language)
 
     if nlp:
-        print(get_clean_corpus(search_text))
+        corpus_dict, dtm = perform_nlp(search_text)
+        show_word_cloud(corpus_dict)
 
 
 if __name__ == '__main__':

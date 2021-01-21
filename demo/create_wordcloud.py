@@ -2,6 +2,7 @@
 Creates wordcloud from corpuses dictionary.
 """
 
+import streamlit as st
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from sklearn.feature_extraction import text
@@ -19,13 +20,14 @@ def show_word_cloud(corpus_dict):
                    colormap="Dark2",
                    max_font_size=100)
 
+    fig, ax = plt.subplots()
     for index, (item, value) in enumerate(corpus_dict.items()):
         wc.generate(corpus_dict[item])
         plt.subplot(3, 4, index+1)
         plt.imshow(wc, interpolation="bilinear")
         plt.axis("off")
         plt.title(item)
-    plt.show()
+    st.pyplot(fig)
 
 
 def main():
