@@ -5,6 +5,7 @@ from utils.config import get_config
 from utils.client import get_client
 from extract.search import search_youtube
 from extract.caption import download_captions
+from nlp.create_corpus import get_clean_corpus
 
 
 def read_config():
@@ -21,7 +22,8 @@ def read_config():
     max_results = conf['video']['max_results']
     search = conf['app']['search']
     download = conf['app']['download']
-    return search_text, language, order, max_results, search, download
+    nlp = conf['app']['nlp']
+    return search_text, language, order, max_results, search, download, nlp
 
 
 def main():
@@ -31,13 +33,16 @@ def main():
     """
 
     youtube = get_client()
-    search_text, language, order, max_results, search, download = read_config()
+    search_text, language, order, max_results, search, download, nlp = read_config()
 
     if search:
         video_ids = search_youtube(youtube, search_text, language, order, max_results)
 
     if download:
         download_captions(search_text, video_ids, language)
+
+    if nlp:
+        print(get_clean_corpus(search_text))
 
 
 if __name__ == '__main__':
